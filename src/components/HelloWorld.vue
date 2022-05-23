@@ -1,9 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from "vue";
+import liff from "@line/liff";
+defineProps<{ msg: string }>();
 
-defineProps<{ msg: string }>()
-
-const count = ref(0)
+const count = ref(0);
+onMounted(() => {
+  console.log("init");
+  liff.init({ liffId: "1657157290-r55nwMOv" }, () => {
+    if (liff.isLoggedIn()) {
+      runApp();
+    } else {
+      liff.login();
+    }
+  });
+});
+function runApp() {
+  const idToken = liff.getIdToken();
+  console.log(idToken);
+  liff
+    .getProfile()
+    .then((profile) => {
+      console.log(profile);
+    })
+    .catch((err) => console.error(err));
+}
 </script>
 
 <template>

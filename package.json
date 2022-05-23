@@ -9,6 +9,7 @@
     "lint": "yarn run eslint --ext .js,.vue ./src"
   },
   "dependencies": {
+    "@line/liff": "^2.20.0",
     "vue": "^3.2.25"
   },
   "devDependencies": {
