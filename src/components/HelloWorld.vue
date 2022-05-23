@@ -15,7 +15,7 @@ onMounted(() => {
   });
 });
 function runApp() {
-  const idToken = liff.getIdToken();
+  const idToken = liff.getIDToken();
   console.log(idToken);
   liff
     .getProfile()
