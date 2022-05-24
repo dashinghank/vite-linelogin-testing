@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import liff from "@line/liff";
 defineProps<{ msg: string }>();
 
-const count = ref(0);
 onMounted(() => {
   console.log("init");
   liff.init({ liffId: "1657157290-r55nwMOv" }, () => {
@@ -17,12 +16,16 @@ onMounted(() => {
 function runApp() {
   const idToken = liff.getIDToken();
   console.log(idToken);
-  liff
-    .getProfile()
-    .then((profile) => {
-      console.log(profile);
-    })
-    .catch((err) => console.error(err));
+  liff.permission.query("email").then((permissionStatus) => {
+    // permissionStatus = { state: 'granted' }
+    console.log(permissionStatus);
+  });
+  // liff
+  //   .getProfile()
+  //   .then((profile) => {
+  //     console.log(profile);
+  //   })
+  //   .catch((err) => console.error(err));
 }
 </script>
 
@@ -46,7 +49,7 @@ function runApp() {
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <button type="button" @click="count++">count is: {{ count }}</button>
+  <button type="button">count is: a</button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
